@@ -1,15 +1,9 @@
 # Ejercicios React - Rolling Code School 
 Prácticas con componentes, ciclo de vida del componente, eventos etc.
 
-## Ejercicio N°4: Lista de tareas - Dificultad: 🟢
+## Ejercicio N°5: Lista de tareas (con localstorage) - Dificultad: 🟢🟡
 
-Crear una aplicación web que muestre una lista de tareas, al ingresar una tarea
-en el input y presionar enter, esta tarea se debe mostrar en una lista como la
-imagen a continuación:
-
-<br>
-
-![Ejercicio 3](./public/tp4.jpg)
+Modifica el programa anterior (TPN° 4) para que las tareas se puedan almacenar en el localstorage.
 
 ### Link de Deploy:
-- [Netlify](https://lucasecapdevila-tpn4react76i.netlify.app/)
+- [Netlify](https://lucasecapdevila-tpn5react76i.netlify.app/)
