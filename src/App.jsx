@@ -4,7 +4,7 @@ import FormTareas from './components/FormTareas'
 import Footer from './components/Footer'
 import ListaTareas from './components/ListaTareas'
 import { useEffect, useState } from 'react'
-import { crearTareaAPI, leerTareasAPI } from './helpers/queries'
+import { crearTareaAPI, eliminarTareaAPI, leerTareasAPI } from './helpers/queries'
 
 function App() {
   useEffect(() => {
@@ -40,13 +40,26 @@ function App() {
     }
   }
 
+  const eliminarTarea = async(id) => {
+    //  Estás seguro ?
+    const response = await eliminarTareaAPI(id)
+    if(response.status === 200){
+      //  Se actualiza la lista de tareas
+      const listaTareasActualizada = await leerTareasAPI()
+      setListaTareas(listaTareasActualizada)
+
+      //  Mensaje de confirmación
+      console.log('Borrado !');
+    }
+  }
+
   return (
     <>
       <Container className='my-4 mainPage'>
         <h1 className='display-1 text-center'>Lista de Tareas</h1>
         <h2 className="text-center my-4">Ingrese aquí sus tareas</h2>
         <FormTareas crearTarea={crearTarea} />
-        <ListaTareas listaTareas={listaTareas} />
+        <ListaTareas listaTareas={listaTareas} eliminarTarea={eliminarTarea} />
       </Container>
 
       <Footer />
