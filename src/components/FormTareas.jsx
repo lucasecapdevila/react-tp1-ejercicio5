@@ -1,6 +1,6 @@
 import { Button, Form } from 'react-bootstrap';
 
-const FormTareas = () => {
+const FormTareas = ({crearTarea}) => {
   return (
     <section>
       <Form>

@@ -10,3 +10,19 @@ export const leerTareasAPI = async() => {
     console.error(error);
   }
 }
+
+//  Solicitud tipo POST (crear)
+export const crearTareaAPI = async(nuevaTarea) => {
+  try {
+    const response = await fetch(URI_TAREAS, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(nuevaTarea)
+    })
+    return response
+  } catch (error) {
+    console.error(error);
+  }
+}
