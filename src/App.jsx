@@ -23,13 +23,20 @@ function App() {
   }
 
   const crearTarea = async(nuevaTarea) => {
-    const response = await crearTareaAPI(nuevaTarea)
-    if(response.status === 201){
-      //  Mensaje de éxito
-      console.log('Creado !');
-      console.log(nuevaTarea);
-    } else{
-      //  Mensaje de error
+    try {
+      const response = await crearTareaAPI(nuevaTarea)
+      if(response.status === 201){
+        //  Mensaje de éxito
+        console.log('Creado !');
+        console.log(nuevaTarea);
+        const nuevaListaTareas = [...listaTareas, nuevaTarea]
+        setListaTareas(nuevaListaTareas)
+      } else{
+        //  Mensaje de error
+        console.log('No se pudo agregar la tarea :(');
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 
