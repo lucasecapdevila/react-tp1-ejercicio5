@@ -1,8 +1,12 @@
 {
-  "tareas":[
+  "tareas": [
     {
-      "nombreTarea": "Cocinar",
-      "id": "1"
+      "id": "49ec",
+      "nombreTarea": "Cocinar"
+    },
+    {
+      "id": "e682",
+      "nombreTarea": "Programar"
     }
   ]
 }

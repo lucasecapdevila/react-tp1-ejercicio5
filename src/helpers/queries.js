@@ -21,6 +21,7 @@ export const crearTareaAPI = async(nuevaTarea) => {
       },
       body: JSON.stringify(nuevaTarea)
     })
+    console.log(response);
     return response
   } catch (error) {
     console.error(error);

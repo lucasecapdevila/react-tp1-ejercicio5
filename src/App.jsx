@@ -23,7 +23,7 @@ function App() {
   }
 
   const crearTarea = async(nuevaTarea) => {
-    const response = await crearTareaAPI()
+    const response = await crearTareaAPI(nuevaTarea)
     if(response.status === 201){
       //  Mensaje de éxito
       console.log('Creado !');
