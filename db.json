@@ -1,5 +1,12 @@
 {
   "tareas": [
-    
+    {
+      "id": "e6d8",
+      "nombreTarea": "Cocinar"
+    },
+    {
+      "id": "6dad",
+      "nombreTarea": "Cocinarrrrrrrrrr"
+    }
   ]
 }

@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 
 const formInicial = {
   nombreTarea: ''
 }
 
-const FormTareas = ({crearTarea}) => {
+const FormTareas = ({crearTarea, editarTarea, tareaAEditar, setTareaAEditar}) => {
 
+  useEffect(() => {
+    tareaAEditar ? setForm(tareaAEditar) : setForm(formInicial)
+  }, [tareaAEditar])
   const [form, setForm] = useState(formInicial)
 
   const handleChange = (e) => {
@@ -22,12 +25,14 @@ const FormTareas = ({crearTarea}) => {
       crearTarea(form)
     } else{
       console.log('Aquí voy a editar');
+      editarTarea(form)
     }
     handleReset()
   }
 
   const handleReset = (e) => {
     setForm(formInicial)
+    setTareaAEditar(null)
   }
 
   return (

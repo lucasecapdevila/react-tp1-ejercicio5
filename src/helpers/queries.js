@@ -27,6 +27,22 @@ export const crearTareaAPI = async(nuevaTarea) => {
   }
 }
 
+//  Solicitud tipo PUT (editar)
+export const editarTareaAPI = async(id, tarea) => {
+  try {
+    const response = await fetch(`${URI_TAREAS}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(tarea)
+    })
+    return response
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 //  Solicitud tipo DELETE (eliminar)
 export const eliminarTareaAPI = async(id) => {
   try {
