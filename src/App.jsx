@@ -41,12 +41,12 @@ function App() {
     }
   }
 
-  const editarTarea = async(tareaEditada) => {
-    const response = await editarTareaAPI(tareaEditada.id, tareaEditada)
+  const editarTarea = async(tarea) => {
+    const response = await editarTareaAPI(tarea.id, tarea)
     if(response.status === 200){
       //  Mensaje de éxito
       console.log('Se editó');
-      const nuevaListaTareas = listaTareas.map(tarea => tareaEditada.id === tareaEditada.id ? tareaEditada : tarea)
+      const nuevaListaTareas = listaTareas.map(elementoTarea => elementoTarea.id === tarea.id ? tarea : elementoTarea)
       setListaTareas(nuevaListaTareas)
     } else{
       //  Mensaje de error
