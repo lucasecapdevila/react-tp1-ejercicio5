@@ -54,3 +54,15 @@ export const eliminarTareaAPI = async(tarea) => {
     console.error(error);
   }
 }
+
+//  Solicitud tipo DELETE (eliminar)
+export const eliminarTodasLasTareasAPI = async() => {
+  try {
+    const response = await fetch(`${URI_TAREAS}`, {
+      method: "DELETE",
+    })
+    return response
+  } catch (error) {
+    console.error(error);
+  }
+}

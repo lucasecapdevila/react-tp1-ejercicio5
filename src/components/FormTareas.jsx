@@ -36,7 +36,7 @@ const FormTareas = ({crearTarea, editarTarea, tareaAEditar, setTareaAEditar}) =>
 
   return (
     <section>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className='d-flex flex-column'>
         <Form.Group className="mb-3 d-flex" controlId='nombreTarea'>
           <Form.Control
             name='nombreTarea'
@@ -48,9 +48,8 @@ const FormTareas = ({crearTarea, editarTarea, tareaAEditar, setTareaAEditar}) =>
             onChange={handleChange}
             value={form.nombreTarea}
           />
-          <Form.Text className='text-danger'></Form.Text>
         </Form.Group>
-        <Button variant='success' className='mx-2 px-4' type='submit'>{form._id ? 'Editar' : 'Agregar'}</Button>
+        <Button variant='success' className='mx-2 px-4 align-self-end' type='submit'>{form._id ? 'Editar' : 'Agregar'}</Button>
       </Form>
     </section>
   );

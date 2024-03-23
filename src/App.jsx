@@ -1,10 +1,10 @@
-import { Container } from 'react-bootstrap'
+import { Alert, Container } from 'react-bootstrap'
 import './App.css'
 import FormTareas from './components/FormTareas'
 import Footer from './components/Footer'
 import ListaTareas from './components/ListaTareas'
 import { useEffect, useState } from 'react'
-import { crearTareaAPI, editarTareaAPI, eliminarTareaAPI, leerTareasAPI } from './helpers/queries'
+import { crearTareaAPI, editarTareaAPI, eliminarTareaAPI, eliminarTodasLasTareasAPI, leerTareasAPI } from './helpers/queries'
 import Swal from 'sweetalert2'
 
 function App() {
@@ -18,6 +18,9 @@ function App() {
   const traerTareas = async() => {
     try {
       const listaTareasAPI = await leerTareasAPI()
+      if(!listaTareasAPI){
+        return setListaTareas([])
+      }
       setListaTareas(listaTareasAPI)
     } catch (error) {
       console.error(error);
@@ -118,13 +121,48 @@ function App() {
     }
   }
 
+  const eliminarTodasLasTareas = () => {
+    try {
+      Swal.fire({
+        title: "Estás seguro que desea vaciar la lista de tareas ?",
+        text: "No podrás revertir este proceso!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Confirmar"
+      }).then(async(result) => {
+        if (result.isConfirmed) {
+          const response = await eliminarTodasLasTareasAPI()
+          if(response.status === 200){
+            const listaTareasActualizada = await leerTareasAPI()
+            setListaTareas(listaTareasActualizada)
+            Swal.fire({
+              title: "Eliminada!",
+              text: "La lista de tareas se vació exitosamente.",
+              icon: "success"
+            });
+          }
+        }
+      })
+    }
+    catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <>
       <Container className='my-4 mainPage'>
         <h1 className='display-1 text-center'>Lista de Tareas</h1>
         <h2 className="text-center my-4">Ingrese aquí sus tareas</h2>
         <FormTareas crearTarea={crearTarea} editarTarea={editarTarea} tareaAEditar={tareaAEditar} setTareaAEditar={setTareaAEditar} />
-        <ListaTareas listaTareas={listaTareas} eliminarTarea={eliminarTarea} setTareaAEditar={setTareaAEditar} />
+        <div className='my-4'>
+          {listaTareas.length === 0 
+            ? <Alert variant='danger' className='fs-5 text-center w-50 mx-auto'>En este momento no hay tareas pendientes.</Alert>
+            : <ListaTareas listaTareas={listaTareas} eliminarTarea={eliminarTarea} setTareaAEditar={setTareaAEditar} eliminarTodasLasTareas={eliminarTodasLasTareas} />
+          }
+        </div>
       </Container>
 
       <Footer />
