@@ -21,7 +21,7 @@ const FormTareas = ({crearTarea, editarTarea, tareaAEditar, setTareaAEditar}) =>
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if(form.id === undefined){
+    if(form._id === undefined){
       crearTarea(form)
     } else{
       console.log('Aquí voy a editar');
