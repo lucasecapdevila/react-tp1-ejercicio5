@@ -51,7 +51,7 @@ const FormTareas = ({crearTarea, editarTarea, tareaAEditar, setTareaAEditar}) =>
           />
           <Form.Text className='text-danger'></Form.Text>
         </Form.Group>
-        <Button variant='success' className='mx-2 px-4' type='submit'>Agregar</Button>
+        <Button variant='success' className='mx-2 px-4' type='submit'>{form._id ? 'Editar' : 'Agregar'}</Button>
       </Form>
     </section>
   );

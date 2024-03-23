@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import ListaTareas from './components/ListaTareas'
 import { useEffect, useState } from 'react'
 import { crearTareaAPI, editarTareaAPI, eliminarTareaAPI, leerTareasAPI } from './helpers/queries'
+import Swal from 'sweetalert2'
 
 function App() {
   useEffect(() => {
@@ -27,14 +28,22 @@ function App() {
     try {
       const response = await crearTareaAPI(nuevaTarea)
       if(response.status === 201){
-        //  Mensaje de éxito
-        console.log('Creado !');
-        console.log(nuevaTarea);
+        Swal.fire({
+          title: "Tarea agregada !",
+          text: `La tarea ${nuevaTarea.nombreTarea} se agregó exitosamente.`,
+          icon: "success",
+          position: "top",
+          showConfirmButton: false,
+          timer: 2200
+        });
         const nuevaListaTareas = [...listaTareas, nuevaTarea]
         setListaTareas(nuevaListaTareas)
       } else{
-        //  Mensaje de error
-        console.log('No se pudo agregar la tarea :(');
+        Swal.fire({
+          title: "Ocurrió un error",
+          text: `La tarea ${nuevaTarea.nombreTarea} no pudo ser creada. Intentelo nuevamente en unos minutos.`,
+          icon: "error",
+        });
       }
     } catch (error) {
       console.error(error);
@@ -42,31 +51,69 @@ function App() {
   }
 
   const editarTarea = async(tarea) => {
-    const response = await editarTareaAPI(tarea._id, tarea)
-    if(response.status === 200){
-      //  Mensaje de éxito
-      console.log('Se editó');
-      const nuevaListaTareas = listaTareas.map(elementoTarea => elementoTarea._id === tarea._id ? tarea : elementoTarea)
-      setListaTareas(nuevaListaTareas)
-    } else{
-      //  Mensaje de error
-      console.log('No se pudo editar');
+    try {
+      const response = await editarTareaAPI(tarea._id, tarea)
+      if(response.status === 200){
+        Swal.fire({
+          title: "¿Quieres guardar los cambios?",
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: "Guardar",
+          denyButtonText: "No guardar"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              title: "Tarea editada !",
+              text: `La tarea ${tarea.nombreTarea} se editó exitosamente.`,
+              icon: "success",
+              position: "top",
+              showConfirmButton: false,
+              timer: 2200
+            });
+            const nuevaListaTareas = listaTareas.map(elementoTarea => elementoTarea._id === tarea._id ? tarea : elementoTarea)
+            setListaTareas(nuevaListaTareas)
+          } else if (result.isDenied) {
+            Swal.fire("Los cambios no fueron guardados", "", "info");
+          }
+        });
+      } else{
+        Swal.fire({
+          title: "Ocurrió un error",
+          text: `La tarea ${tarea.nombreTarea} no pudo ser editada. Intentelo nuevamente en unos minutos.`,
+          icon: "error",
+        });
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 
-  const eliminarTarea = async(id) => {
+  const eliminarTarea = (tarea) => {
     try {
-      //  Estás seguro ?
-      const response = await eliminarTareaAPI(id)
-      if(response.status === 200){
-        //  Se actualiza la lista de tareas
-        const listaTareasActualizada = await leerTareasAPI()
-        setListaTareas(listaTareasActualizada)
-
-        //  Mensaje de confirmación
-        console.log('Borrado !');
-      }
-    } catch (error) {
+      Swal.fire({
+        title: "Estás seguro que desea eliminar la tarea ?",
+        text: "No podrás revertir este proceso!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Eliminar"
+      }).then(async(result) => {
+        if (result.isConfirmed) {
+          const response = await eliminarTareaAPI(tarea)
+          if(response.status === 200){
+            const listaTareasActualizada = await leerTareasAPI()
+            setListaTareas(listaTareasActualizada)
+            Swal.fire({
+              title: "Eliminada!",
+              text: "La tarea se eliminó exitosamente.",
+              icon: "success"
+            });
+          }
+        }
+      })
+    }
+    catch (error) {
       console.error(error);
     }
   }

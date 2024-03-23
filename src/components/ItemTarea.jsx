@@ -10,7 +10,7 @@ const ItemTarea = ({tarea, eliminarTarea, setTareaAEditar}) => {
         <Button variant='warning' className='me-2' onClick={() => setTareaAEditar(tarea)}>
         <FontAwesomeIcon icon={faFilePen} />
         </Button>
-        <Button variant='secondary' className='me-2' onClick={() => eliminarTarea(tarea._id)}>
+        <Button variant='secondary' className='me-2' onClick={() => eliminarTarea(tarea)}>
           <FontAwesomeIcon icon={faTrash} />
         </Button>
       </div>

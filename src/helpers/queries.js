@@ -44,9 +44,9 @@ export const editarTareaAPI = async(id, tarea) => {
 }
 
 //  Solicitud tipo DELETE (eliminar)
-export const eliminarTareaAPI = async(id) => {
+export const eliminarTareaAPI = async(tarea) => {
   try {
-    const response = await fetch(`${URI_TAREAS}/${id}`, {
+    const response = await fetch(`${URI_TAREAS}/${tarea._id}`, {
       method: "DELETE",
     })
     return response
