@@ -39,7 +39,7 @@ export const editarTareaAPI = async(id, tarea) => {
     })
     return response
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 

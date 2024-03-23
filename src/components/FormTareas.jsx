@@ -24,7 +24,6 @@ const FormTareas = ({crearTarea, editarTarea, tareaAEditar, setTareaAEditar}) =>
     if(form._id === undefined){
       crearTarea(form)
     } else{
-      console.log('Aquí voy a editar');
       editarTarea(form)
     }
     handleReset()
