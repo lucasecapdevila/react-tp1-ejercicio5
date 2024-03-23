@@ -159,7 +159,7 @@ function App() {
         <FormTareas crearTarea={crearTarea} editarTarea={editarTarea} tareaAEditar={tareaAEditar} setTareaAEditar={setTareaAEditar} />
         <div className='my-4'>
           {listaTareas.length === 0 
-            ? <Alert variant='danger' className='fs-5 text-center w-50 mx-auto'>En este momento no hay tareas pendientes.</Alert>
+            ? <Alert variant='danger' className='fs-5 text-center mx-auto listaVacia'>En este momento no hay tareas pendientes.</Alert>
             : <ListaTareas listaTareas={listaTareas} eliminarTarea={eliminarTarea} setTareaAEditar={setTareaAEditar} eliminarTodasLasTareas={eliminarTodasLasTareas} />
           }
         </div>
