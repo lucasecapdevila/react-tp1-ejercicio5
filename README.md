@@ -5,5 +5,11 @@ Prácticas con componentes, ciclo de vida del componente, eventos etc.
 
 Modifica el programa anterior (TPN° 4) para que las tareas se puedan almacenar en el localstorage.
 
-### Link de Deploy:
+## Edit:
+
+Se modifica el almacenamiento previamente usado (localstorage) por un backend usando node.js y mongodb.
+
+- [Repositorio backend](https://github.com/lucasecapdevila/backend-listaTareas)
+
+### Link de Deploy Frontend:
 - [Netlify](https://lucasecapdevila-tpn5react76i.netlify.app/)
